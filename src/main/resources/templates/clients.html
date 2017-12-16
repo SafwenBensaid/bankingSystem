@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thylemeaf/layout"
+	xmlns:sec="http:/www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="template">
+<head>
+<meta charset="utf-8" />
+<title>Banking System</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<div class="col-md-6">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">Ajout d'un nouveau Client</div>
+				<div class="panel-body">
+					<form th:action="@{/saveClient}" method="post">
+						<div>
+							<label>Nom: </label> <input type="text" name="nom"
+								th:value="${nom}" />
+						</div>
+						<div>
+							<label>Prenom: </label> <input type="text" name="prenom"
+								th:value="${prenom}" />
+						</div>
+						<div>
+							<label>Numéro CIN: </label> <input type="text" name="numCin"
+								th:value="${numCin}" />
+						</div>
+						<div>
+							<label>Date de naissance: </label> <input type="date"
+								name="dateNaissance" th:value="${dateNaissance}" />
+						</div>
+						<div>
+							<label>Profession: </label> <input type="text" name="profession"
+								th:value="${profession}" />
+						</div>
+						<div>
+							<label>Adresse: </label> <input type="text" name="adresse"
+								th:value="${adresse}" />
+						</div>
+						<div>
+							<label>Numéro de téléphone: </label> <input type="tel"
+								name="telephone" th:value="${telephone}" />
+						</div>
+						<div>
+							<label>Adresse e-mail: </label> <input type="text" name="email"
+								th:value="${email}" />
+						</div>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</form>
+					<div class="text-danger" th:if="${exeptionClient}"
+						th:text="${exeptionClient.message}"></div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>

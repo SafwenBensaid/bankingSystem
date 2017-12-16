@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thylemeaf/layout"
+	xmlns:sec="http:/www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="template">
+<head>
+<meta charset="utf-8" />
+<title>Banking System</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<div class="col-md-6">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">Ajout d'un nouveau Compte</div>
+				<div class="panel-body">
+					<form th:action="@{/saveCompte}" method="post">
+						<div th:if="${client}">
+							<label>Code du Client: </label>
+							<input type="text" name="codeClient" th:value="${client.codeClient}" />
+						</div>
+						<div>
+							<label>Code du Client: </label> <input type="text"
+								name="codeClient" th:value="${codeClient}" />
+						</div>
+						<div>
+							<label>Compte Courant </label> <input type="radio"
+								name="typeCompte" value="CompteCourant" checked="checked"
+								onchange="document.getElementById('taux').style='display: none'; document.getElementById('decouvert').style='display: block'" />
+							<label>Compte Epargne </label> <input type="radio"
+								name="typeCompte" value="CompteEpargne"
+								onchange="document.getElementById('decouvert').style='display: none'; document.getElementById('taux').style='display: block'" />
+						</div>
+						<div>
+							<label>Code du Compte: </label> <input type="text"
+								name="codeCompte" th:value="${codeCompte}" />
+						</div>
+						<div>
+							<label>Solde de départ: </label> <input type="text" name="solde"
+								th:value="${solde}" />
+						</div>
+						<div id="decouvert">
+							<label>Découvert: </label> <input type="text" name="decouvert"
+								th:value="${decouvert}" />
+						</div>
+						<div style="display: none" id="taux">
+							<label>Taux: </label> <input type="text" name="taux"
+								th:value="${taux}" />
+						</div>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</form>
+					<div class="text-danger" th:if="${exeptionCompte}"
+						th:text="${exeptionCompte.message}"></div>
+				</div>
+			</div>
+
+
+
+		</div>
+
+		<div class="col-md-6">
+
+			<div class="panel panel-primary" th:if="${client}">
+				<div class="panel-heading">Informations sur le Client</div>
+				<div class="panel-body">
+					<div>
+						<label>Nom: </label> <label th:text="${client.nom}"></label>
+					</div>
+					<div>
+						<label>Prenom: </label> <label
+							th:text="${client.prenom}"></label>
+					</div>
+					<div>
+						<label>Numéro CIN: </label> <label th:text="${client.numCin}"></label>
+					</div>
+					<div>
+						<label>Date de naissance: </label> <label
+							th:text="${client.dateNaissance}"></label>
+					</div>
+					<div>
+						<label>Profession: </label> <label th:text="${client.profession}"></label>
+					</div>
+					<div>
+						<label>Adresse: </label> <label
+							th:text="${client.adresse}"></label>
+					</div>
+					<div>
+						<label>Numéro de téléphone: </label> <label
+							th:text="${client.telephone}"></label>
+					</div>
+					<div>
+						<label>Adresse e-mail: </label> <label
+							th:text="${client.email}"></label>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>
